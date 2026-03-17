@@ -52,7 +52,7 @@
 
         .section-title {
             margin: 0 0 16px;
-            font-size: 18px;
+            font-size: 24px;
             font-weight: bold;
             color: #1e2a3a;
         }
@@ -97,16 +97,38 @@
             vertical-align: top;
         }
 
+        .summary-card h2,
         .summary-card h3 {
-            margin: 0 0 10px;
-            font-size: 15px;
+            margin: 0 0 12px;
+            font-size: 20px;
             color: #344256;
         }
 
         .summary-line {
             margin: 6px 0;
-            font-size: 14px;
-            line-height: 1.6;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .summary-label {
+            display: inline-block;
+            width: 75%;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            vertical-align: baseline;
+            white-space: nowrap;
+        }
+
+        .summary-value {
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+            color: #22314a;
+            text-align: left;
+            vertical-align: baseline;
+            white-space: nowrap;
         }
 
         .badge {
@@ -143,14 +165,18 @@
             color: #516074;
             font-size: 12px;
             text-align: left;
-            padding: 12px 14px;
+            padding: 8px 10px;
             border-bottom: 1px solid #e8edf5;
         }
 
         .daily-table td {
             font-size: 14px;
-            padding: 12px 14px;
+            padding: 8px 10px;
             border-bottom: 1px solid #eef2f7;
+        }
+
+        .daily-table td:nth-child(3) {
+            white-space: nowrap;
         }
 
         .daily-table tr:last-child td {
@@ -162,9 +188,21 @@
             font-size: 12px;
             color: #758296;
         }
-
+        
         .muted {
             color: #7b8798;
+        }
+        
+        .earliest {
+            color: #2ca9e1;
+        }
+
+        .latest {
+            color: #b94047;
+        }
+
+        .result {
+            display: inline;
         }
     </style>
 </head>
@@ -182,7 +220,7 @@
             </div>
 
             <div class="section">
-                <h2 class="section-title">今週のサマリー</h2>
+                <h2 class="section-title">今週の集計結果</h2>
                 <table class="metrics" role="presentation">
                     <tr>
                         <td class="metric-card">
@@ -197,6 +235,8 @@
                                 <?= view.totalRecords ?>
                             </div>
                         </td>
+                    </tr>
+                    <tr>
                         <td class="metric-card">
                             <div class="metric-label">平日平均</div>
                             <div class="metric-value">
@@ -214,42 +254,44 @@
             </div>
 
             <div class="section">
-                <h2 class="section-title">最早 / 最遅</h2>
+                <h2 class="section-title">Earliest / Latest</h2>
                 <table class="summary-grid" role="presentation">
                     <tr>
                         <td class="summary-card" width="50%">
-                            <h3>全体</h3>
-                            <div class="summary-line">最早:
-                                <?= view.earliestText ?>
+                            <h2>Weekday</h2>
+                            <div class="summary-line">
+                                <span class="summary-label earliest">Earliest</span>
+                                <span class="summary-value result"><?= view.weekdayEarliestText ?></span>
                             </div>
-                            <div class="summary-line">最遅:
-                                <?= view.latestText ?>
-                            </div>
-                        </td>
-                        <td class="summary-card" width="50%">
-                            <h3>平日</h3>
-                            <div class="summary-line">最早:
-                                <?= view.weekdayEarliestText ?>
-                            </div>
-                            <div class="summary-line">最遅:
-                                <?= view.weekdayLatestText ?>
+                            <div class="summary-line">
+                                <span class="summary-label latest">Latest</span>
+                                <span class="summary-value result"><?= view.weekdayLatestText ?></span>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td class="summary-card" width="50%">
-                            <h3>休日</h3>
-                            <div class="summary-line">最早:
-                                <?= view.holidayEarliestText ?>
+                            <h2>Holiday</h2>
+                            <div class="summary-line">
+                                <span class="summary-label earliest">Earliest</span>
+                                <span class="summary-value result"><?= view.holidayEarliestText ?></span>
                             </div>
-                            <div class="summary-line">最遅:
-                                <?= view.holidayLatestText ?>
+                            <div class="summary-line">
+                                <span class="summary-label latest">Latest</span>
+                                <span class="summary-value result"><?= view.holidayLatestText ?></span>
                             </div>
                         </td>
+                    </tr>
+                    <tr>
                         <td class="summary-card" width="50%">
-                            <h3>メモ</h3>
-                            <div class="summary-line muted">
-                                平日と休日の起床傾向の差を見比べるための週次サマリーです。
+                            <h2>Over All</h2>
+                            <div class="summary-line">
+                                <span class="summary-label earliest">Earliest</span>
+                                <span class="summary-value result"><?= view.earliestText ?></span>
+                            </div>
+                            <div class="summary-line">
+                                <span class="summary-label latest">Latest</span>
+                                <span class="summary-value result"><?= view.latestText ?></span>
                             </div>
                         </td>
                     </tr>
